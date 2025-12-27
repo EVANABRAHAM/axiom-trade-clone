@@ -1,85 +1,58 @@
-'use client';
-
-import React, { useEffect, useRef, useState } from 'react';
-import { TableRow, TableCell } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
+import React from 'react';
+import { TableCell, TableRow } from '@/components/ui/table';
 import { Token } from '@/lib/features/token-table/tokenSlice';
 import { cn } from '@/lib/utils';
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { formatCompactNumber } from '@/lib/utils';
 
 interface TokenRowProps {
     token: Token;
-    onSelect?: (token: Token) => void;
+    onSelect: (token: Token) => void;
 }
 
-export const TokenRow = React.memo(({ token, onSelect }: TokenRowProps) => {
-    const prevPriceRef = useRef(token.price);
-    const [flashState, setFlashState] = useState<'up' | 'down' | null>(null);
-
-    useEffect(() => {
-        if (token.price > prevPriceRef.current) {
-            setFlashState('up');
-        } else if (token.price < prevPriceRef.current) {
-            setFlashState('down');
-        }
-        prevPriceRef.current = token.price;
-
-        const timer = setTimeout(() => {
-            setFlashState(null);
-        }, 1000); // Animation duration
-
-        return () => clearTimeout(timer);
-    }, [token.price]);
-
-    const formatCurrency = (val: number) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
-    };
-
-    const formatCompact = (val: number) => {
-        return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(val);
-    };
-
+export const TokenRow = ({ token, onSelect }: TokenRowProps) => {
     return (
         <TableRow
-            className={cn(
-                "transition-colors duration-1000 border-border/40 cursor-pointer h-16 hover:bg-muted/30",
-                flashState === 'up' && "animate-flash-green",
-                flashState === 'down' && "animate-flash-red"
-            )}
-            onClick={() => onSelect?.(token)}
+            className="cursor-pointer hover:bg-white/5 border-primaryStroke group transition-colors"
+            onClick={() => onSelect(token)}
         >
             <TableCell className="font-medium">
-                <div className="flex flex-col">
-                    <span className="flex items-center gap-2">
-                        {token.name}
-                        {token.isNew && <Badge variant="new" className="text-[10px] h-4 px-1">NEW</Badge>}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{token.symbol}</span>
+                <div className="flex items-center gap-3">
+                    <div className="relative">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white
+                            ${token.isNew ? 'bg-primaryGreen/20 text-primaryGreen border border-primaryGreen/50' :
+                                token.isMigrated ? 'bg-primaryBlue/20 text-primaryBlue border border-primaryBlue/50' :
+                                    'bg-zinc-800 border border-zinc-700'}`}
+                        >
+                            {token.symbol.substring(0, 2)}
+                        </div>
+                        {token.isNew && <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primaryGreen opacity-75"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primaryGreen"></span></span>}
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <span className="font-bold text-white">{token.symbol}</span>
+                            {token.isMigrated && <Badge variant="secondary" className="text-[10px] h-4 px-1 bg-primaryBlue/10 text-primaryBlue border-primaryBlue/20">MIGRATED</Badge>}
+                        </div>
+                        <div className="text-xs text-textSecondary">{token.name}</div>
+                    </div>
                 </div>
             </TableCell>
-            <TableCell className="text-right font-mono text-base">
-                {formatCurrency(token.price)}
+            <TableCell className="text-right font-mono text-white">
+                ${token.price.toFixed(6)}
             </TableCell>
-            <TableCell className="text-right">
-                <div className={cn(
-                    "flex items-center justify-end gap-1 font-medium",
-                    token.change24h > 0 ? "text-up" : "text-down"
-                )}>
-                    {token.change24h > 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
-                    {Math.abs(token.change24h).toFixed(2)}%
-                </div>
+            <TableCell className={cn("text-right font-mono font-medium", token.change24h >= 0 ? "text-primaryGreen" : "text-primaryRed")}>
+                {token.change24h > 0 ? '+' : ''}{token.change24h.toFixed(2)}%
             </TableCell>
-            <TableCell className="text-right text-muted-foreground hidden md:table-cell">
-                ${formatCompact(token.volume24h)}
+
+            <TableCell className="text-right hidden md:table-cell text-textSecondary font-mono">
+                ${formatCompactNumber(token.volume24h)}
             </TableCell>
-            <TableCell className="text-right text-muted-foreground hidden lg:table-cell">
-                ${formatCompact(token.marketCap)}
+            <TableCell className="text-right hidden lg:table-cell text-textSecondary font-mono">
+                ${formatCompactNumber(token.marketCap)}
             </TableCell>
-            <TableCell className="text-right text-muted-foreground hidden xl:table-cell">
-                ${formatCompact(token.liquidity)}
+            <TableCell className="text-right hidden xl:table-cell text-textSecondary font-mono">
+                ${formatCompactNumber(token.liquidity)}
             </TableCell>
         </TableRow>
     );
-});
-
-TokenRow.displayName = "TokenRow";
+};

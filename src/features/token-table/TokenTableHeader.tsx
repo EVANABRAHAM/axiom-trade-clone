@@ -1,12 +1,9 @@
-'use client';
-
-import { TableHead, TableHeader as UITableHeader, TableRow } from '@/components/ui/table';
-import { ArrowDown, ArrowUp, ChevronsUpDown, Info } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Token } from '@/lib/features/token-table/tokenSlice';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import React from 'react';
+import { TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setSort } from '@/lib/features/token-table/tokenSlice';
+import { setSort, Token } from '@/lib/features/token-table/tokenSlice';
+import { ArrowUpDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const TokenTableHeader = () => {
     const dispatch = useAppDispatch();
@@ -16,74 +13,41 @@ export const TokenTableHeader = () => {
         dispatch(setSort(key));
     };
 
-    const SortIcon = ({ column }: { column: keyof Token }) => {
-        if (sortKey !== column) return <ChevronsUpDown className="ml-1 h-3 w-3" />;
-        return sortDirection === 'asc' ? <ArrowUp className="ml-1 h-3 w-3" /> : <ArrowDown className="ml-1 h-3 w-3" />;
-    };
-
     return (
-        <UITableHeader>
-            <TableRow className="hover:bg-transparent border-border/50">
-                <TableHead
-                    className="cursor-pointer text-xs font-bold uppercase tracking-wider text-muted-foreground w-[200px]"
-                    onClick={() => handleSort('name')}
-                >
-                    <div className="flex items-center">
-                        Token
-                        <SortIcon column="name" />
-                    </div>
-                </TableHead>
-                <TableHead
-                    className="cursor-pointer text-right text-xs font-bold uppercase tracking-wider text-muted-foreground"
-                    onClick={() => handleSort('price')}
-                >
-                    <div className="flex items-center justify-end">
+        <TableHeader>
+            <TableRow className="hover:bg-transparent border-primaryStroke">
+                <TableHead className="w-[300px]">Token</TableHead>
+                <TableHead className="text-right">
+                    <Button variant="ghost" size="sm" onClick={() => handleSort('price')} className="hover:bg-transparent hover:text-white">
                         Price
-                        <SortIcon column="price" />
-                    </div>
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
                 </TableHead>
-                <TableHead
-                    className="cursor-pointer text-right text-xs font-bold uppercase tracking-wider text-muted-foreground"
-                    onClick={() => handleSort('change24h')}
-                >
-                    <div className="flex items-center justify-end">
-                        24h
-                        <SortIcon column="change24h" />
-                    </div>
+                <TableHead className="text-right">
+                    <Button variant="ghost" size="sm" onClick={() => handleSort('change24h')} className="hover:bg-transparent hover:text-white">
+                        24h %
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
                 </TableHead>
-                <TableHead
-                    className="cursor-pointer text-right text-xs font-bold uppercase tracking-wider text-muted-foreground hidden md:table-cell"
-                    onClick={() => handleSort('volume24h')}
-                >
-                    <div className="flex items-center justify-end">
+                <TableHead className="text-right hidden md:table-cell">
+                    <Button variant="ghost" size="sm" onClick={() => handleSort('volume24h')} className="hover:bg-transparent hover:text-white">
                         Volume
-                        <SortIcon column="volume24h" />
-                    </div>
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
                 </TableHead>
-                <TableHead
-                    className="cursor-pointer text-right text-xs font-bold uppercase tracking-wider text-muted-foreground hidden lg:table-cell"
-                    onClick={() => handleSort('marketCap')}
-                >
-                    <div className="flex items-center justify-end">
-                        Mkt Cap
-                        <SortIcon column="marketCap" />
-                    </div>
+                <TableHead className="text-right hidden lg:table-cell">
+                    <Button variant="ghost" size="sm" onClick={() => handleSort('marketCap')} className="hover:bg-transparent hover:text-white">
+                        Market Cap
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
                 </TableHead>
-                <TableHead
-                    className="cursor-pointer text-right text-xs font-bold uppercase tracking-wider text-muted-foreground hidden xl:table-cell"
-                    onClick={() => handleSort('liquidity')}
-                >
-                    <div className="flex items-center justify-end gap-1">
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <span className="flex items-center gap-1">Liquidity <Info className="h-3 w-3 text-muted-foreground/50" /></span>
-                            </TooltipTrigger>
-                            <TooltipContent>Total liquidity in the pool</TooltipContent>
-                        </Tooltip>
-                        <SortIcon column="liquidity" />
-                    </div>
+                <TableHead className="text-right hidden xl:table-cell">
+                    <Button variant="ghost" size="sm" onClick={() => handleSort('liquidity')} className="hover:bg-transparent hover:text-white">
+                        Liquidity
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
                 </TableHead>
             </TableRow>
-        </UITableHeader>
+        </TableHeader>
     );
 };

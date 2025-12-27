@@ -80,8 +80,8 @@ export const TokenTable = () => {
     }, [items, sortKey, sortDirection, activeTab, searchTerm]);
 
     return (
-        <Card className="w-full bg-card/50 border-border/50 backdrop-blur-sm">
-            <CardHeader className="px-6 py-4 border-b border-border/40">
+        <Card className="w-full bg-transparent border-none">
+            <CardHeader className="px-6 py-4 border-b border-primaryStroke">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                         <Button

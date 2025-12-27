@@ -20,7 +20,7 @@ const config = {
         },
         extend: {
             fontFamily: {
-                sans: ["var(--font-sans)", ...fontFamily.sans],
+                sans: ["var(--font-geist-sans)", ...fontFamily.sans],
             },
             colors: {
                 border: "hsl(var(--border))",
@@ -59,6 +59,17 @@ const config = {
                 // Axiom/Trading Specific Colors
                 up: "hsl(var(--up))",
                 down: "hsl(var(--down))",
+
+                // Axiom Shell Colors
+                primaryStroke: "#1E1E24", // Dark border
+                secondaryStroke: "#2A2A35", // Lighter border
+                textPrimary: "#FFFFFF",
+                textSecondary: "#A1A1AA", // zinc-400
+                textTertiary: "#52525B", // zinc-600
+                primaryBlue: "rgb(var(--primary-color) / <alpha-value>)", // Bright Blue with opacity support
+                primaryRed: "#FF4545",
+                primaryGreen: "#00E085",
+                hoverPrimary: "#1E1E24", // Hover background state
             },
             borderRadius: {
                 lg: "var(--radius)",

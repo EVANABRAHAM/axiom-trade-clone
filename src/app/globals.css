@@ -4,52 +4,102 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 40%;
-    /* Darkened from 46.1% for better contrast on white */
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
+    --foreground: 0 0% 98.8%;
+    --background: 228 29.4% 3.3%;
+
+    --primary-color: 82 111 255;
+    --primary-hue: 230;
+    --primary-color-hover: #6683ff;
+
+    /* Axiom Shell Colors */
+    --background-secondary: #101114;
+    --background-tertiary: #18181a;
+
+    --primary-stroke: #22242d;
+    --secondary-stroke: #323542;
+    --border-subtle: #1f1f23;
+
+    --text-primary: #fcfcfc;
+    --text-secondary: #c8c9d1;
+    --text-tertiary: #777a8c;
+
+    --increase: #2fe3ac;
+    --decrease: #ec397a;
+    --increase-hover: #5be7bd;
+    --decrease-hover: #f8649a;
+
+    --chart-up: #0b9981;
+    --chart-down: #f23546;
+
+    --primary-green: #12af80;
+    --primary-yellow: #dcce3c;
+    --primary-orange: #e27c4d;
+    --primary-orange-hover: #ee9267;
+    --primary-red: #f25461;
+    --primary-light-blue: #52c5ff;
+
+    /* Shadcn/UI Mappings */
+    --card: 225 11.1% 7.1%;
+    --card-foreground: 0 0% 98.8%;
+    --popover: 225 11.1% 7.1%;
+    --popover-foreground: 0 0% 98.8%;
+    --primary: 229 100% 66.1%;
+    --primary-foreground: 0 0% 98.8%;
+    --secondary: 231 13.8% 22.7%;
+    --secondary-foreground: 0 0% 98.8%;
+    --muted: 240 4.2% 9.8%;
+    --muted-foreground: 227 12% 51%;
+    --accent: 231 13.8% 22.7%;
+    --accent-foreground: 0 0% 98.8%;
+    --destructive: 338 82.2% 57.5%;
+    --destructive-foreground: 0 0% 98.8%;
+    --border: 229 13.8% 15.5%;
+    --input: 229 13.8% 15.5%;
+    --ring: 229 100% 66.1%;
     --radius: 0.5rem;
     --up: 142 76% 36%;
     --down: 0 84% 60%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 70%;
-    /* Lightened from 64.9% for better contrast on dark */
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --foreground: 0 0% 98.8%;
+    --background: 228 29.4% 3.3%;
+    --card: 225 11.1% 7.1%;
+    --card-foreground: 0 0% 98.8%;
+    --popover: 225 11.1% 7.1%;
+    --popover-foreground: 0 0% 98.8%;
+    --primary: 229 100% 66.1%;
+    --primary-foreground: 0 0% 98.8%;
+    --secondary: 231 13.8% 22.7%;
+    --secondary-foreground: 0 0% 98.8%;
+    --muted: 240 4.2% 9.8%;
+    --muted-foreground: 227 12% 51%;
+    --accent: 231 13.8% 22.7%;
+    --accent-foreground: 0 0% 98.8%;
+    --destructive: 338 82.2% 57.5%;
+    --destructive-foreground: 0 0% 98.8%;
+    --border: 229 13.8% 15.5%;
+    --input: 229 13.8% 15.5%;
+    --ring: 229 100% 66.1%;
+
+    --primary-color: 82 111 255;
+
+    --increase: #2fe3ac;
+    --decrease: #ec397a;
+
+    --primary-green: #12af80;
+    --primary-yellow: #dcce3c;
+    --primary-orange: #e27c4d;
+    --primary-red: #f25461;
+    --primary-light-blue: #52c5ff;
+
+    --primary-stroke: #22242d;
+    --secondary-stroke: #323542;
+    --border-subtle: #1f1f23;
+
+    --text-primary: #fcfcfc;
+    --text-secondary: #c8c9d1;
+    --text-tertiary: #777a8c;
     --up: 142 70% 50%;
     --down: 0 80% 60%;
   }
