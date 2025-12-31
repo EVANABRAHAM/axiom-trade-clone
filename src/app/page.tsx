@@ -1,6 +1,7 @@
 import { TokenTable } from '@/features/token-table/TokenTable';
 import { PulseBoard } from '@/features/pulse/PulseList';
 import { Search, Menu, Copy, Wallet, ChevronDown, ChevronRight, ListFilter, Settings2, Bell, Palette, ExternalLink, Star, User, Settings, LineChart, HelpCircle, List, Bookmark, Keyboard, Volume2, Crosshair, Zap } from 'lucide-react';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -340,6 +341,8 @@ export default function Home() {
           <span>Portfolio</span>
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 }
